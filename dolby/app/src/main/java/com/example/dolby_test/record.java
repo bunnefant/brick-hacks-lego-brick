@@ -25,7 +25,8 @@ public class record extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     private EditText editText;
     private ImageView micButton;
-
+    public String finalPhrase;
+    public Integer AudioRecordStatus = 0;
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
@@ -100,12 +101,17 @@ public class record extends AppCompatActivity {
         micButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                if (AudioRecordStatus==1){
+                    finalPhrase=editText.getText().toString();
                     speechRecognizer.stopListening();
+                    AudioRecordStatus=0;
                 }
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+
+                else if (AudioRecordStatus==0){
                     micButton.setImageResource(R.drawable.safeword_mircophone_record);
+
                     speechRecognizer.startListening(speechRecognizerIntent);
+                    AudioRecordStatus=1;
                 }
                 return false;
             }
