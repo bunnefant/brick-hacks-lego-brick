@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".record"></activity>
+        <activity android:name=".OnboardingActivity"></activity>
+        <activity android:name=".record" />
         <activity android:name=".call" />
         <activity android:name=".monitor" />
         <activity android:name=".MainActivity">

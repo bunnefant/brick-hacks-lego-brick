@@ -1,11 +1,11 @@
-package com.example.app;
+package com.example.dolby_test;
 
-        import android.os.Bundle;
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.app.Adapter.Adapter_walkthrough;
+import com.example.dolby_test.Adapter.Adapter_walkthrough;
 
 import me.relex.circleindicator.CircleIndicator;
 

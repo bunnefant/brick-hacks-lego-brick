@@ -9,20 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <EditText
             android:id="@+id/user_name"
             android:layout_width="297dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginVertical="15dp" />
 
         <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
+
         <Button
             android:id="@+id/leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="leave"
             android:layout_marginRight="10dp"
-            />
+            android:text="Back" />
 
         <EditText
             android:id="@+id/text"
@@ -32,16 +34,19 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/button"
             android:hint="Tap to Speak"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:layout_marginVertical="10dp"/>
 
         <ImageView
             android:id="@+id/button"
-            android:layout_width="451dp"
-            android:layout_height="433dp"
+            android:layout_width="173dp"
+            android:layout_height="191dp"
             android:layout_alignParentRight="true"
             android:backgroundTint="#F9F8FA"
             android:paddingRight="10dp"
-            android:src="@drawable/biolabselfie" />
+            android:src="@drawable/safeword_mircophone"
+            android:layout_marginHorizontal="125dp"
+            android:layout_marginVertical="150dp"/>
     </LinearLayout>
 
 
