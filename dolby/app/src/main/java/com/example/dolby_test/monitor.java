@@ -96,7 +96,10 @@ public class monitor extends AppCompatActivity {
                 }).error(error());
     }
 
-
+    public void startNewActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void onLeave() {
         VoxeetSDK.conference().leave()
@@ -193,6 +196,7 @@ public class monitor extends AppCompatActivity {
                         else if (data.get(0).contains(safePhrase)) {
                             //SAFE RUN
                             speechRecognizer.stopListening();
+                            startNewActivity();
                         }
                     }
 
@@ -205,7 +209,7 @@ public class monitor extends AppCompatActivity {
                             speechRecognizer.stopListening();
                             String name = "Sohil";
                             VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
-                            String conference_name = "Saftey-Hotline";
+                            String conference_name = "Safety-Hotline";
                             VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
                                     .then((result, solver) -> {
                                         Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
@@ -216,9 +220,10 @@ public class monitor extends AppCompatActivity {
 
 
                         }
-                        else if (data.get(0).toLowerCase().contains(dangerPhrase.toLowerCase())) {
+                        else if (data.get(0).toLowerCase().contains(safePhrase.toLowerCase())) {
                             //SAFE RUN
                             speechRecognizer.stopListening();
+                            startNewActivity();
                         }
                     }
 
