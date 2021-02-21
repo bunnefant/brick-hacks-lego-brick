@@ -61,6 +61,7 @@ public class monitor extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     public String dangerPhrase;
     public String safePhrase;
+    public static final Integer RecordAudioRequestCode = 1;
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
@@ -126,7 +127,19 @@ public class monitor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
+        ButterKnife.bind(this);
         String name = getIntent().getStringExtra("Name");
+        VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+        String conference_name = "Saftey-Hotline";
+        //login
+        VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
+                .then((result, solver) -> {
+                    Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
+                    updateViews();
+                })
+                .error(error());
+        //join call
+
         //Speech to Text
 
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -203,20 +216,20 @@ public class monitor extends AppCompatActivity {
 
                     }
                 });
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        onCall(conference_name);
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 //        Context context = getApplicationContext();
 //        CharSequence text = "Hello toast!";
 //        int duration = Toast.LENGTH_SHORT;
 //        Toast toast = Toast.makeText(context, text, duration);
 //        toast.show();
 
-        ButterKnife.bind(this);
+
 
         //all the logic of the onCreate will be put after this comment
 
         //we now initialize the sdk
-        VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+
 
         //adding the user_name, login and logout views related to the open/close and conference flow
 //        add(views, R.id.login);
@@ -252,15 +265,7 @@ public class monitor extends AppCompatActivity {
 //        // Add the leave button and enable it only while in a conference
 //        add(views, R.id.leave);
 //        add(buttonsInConference, R.id.leave);
-        String conference_name = "Saftey-Hotline";
-        //login
-        VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
-                .then((result, solver) -> {
-                    Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error(error());
-        //join call
+
 
     }
 
