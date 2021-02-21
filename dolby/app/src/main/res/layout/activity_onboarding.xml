@@ -7,12 +7,7 @@
     tools:context=".OnboardingActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="332dp"
-        android:text="Button"
-        android:visibility="invisible" />
+
 
     <LinearLayout
         android:id="@+id/lay_one"
@@ -110,6 +105,12 @@
             android:text="@string/get_started"
             android:textColor="@color/fav"
             android:textSize="15.7sp" />
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            android:text="Button"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </RelativeLayout>
