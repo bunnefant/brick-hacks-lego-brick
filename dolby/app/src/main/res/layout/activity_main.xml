@@ -76,9 +76,30 @@
                 android:id="@+id/leave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="leave" />
+                android:text="leave"
+                android:layout_marginRight="10dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/button"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:hint="Tap to Speak"
+                android:id="@+id/text"
+                android:layout_centerInParent="true"
+                />
 
+            <ImageView
+                android:id="@+id/button"
+                android:layout_width="102dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="#F9F8FA"
+                android:paddingRight="10dp"
+                android:src="@drawable/biolabselfie" />
         </LinearLayout>
+
 
         <!-- Step 3. Put the layout changes for the video step here -->
 

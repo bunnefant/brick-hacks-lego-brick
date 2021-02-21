@@ -2,12 +2,18 @@ package com.example.dolby_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.voxeet.VoxeetSDK;
 import com.voxeet.promise.solve.ErrorPromise;
@@ -29,6 +36,7 @@ import com.voxeet.sdk.services.conference.information.ConferenceInformation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import butterknife.Bind;
@@ -37,6 +45,10 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final Integer RecordAudioRequestCode = 1;
+    private SpeechRecognizer speechRecognizer;
+    private EditText editText;
+    private ImageView micButton;
     protected List<View> views = new ArrayList<>();
     protected List<View> buttonsNotLoggedIn = new ArrayList<>();
     protected List<View> buttonsInConference = new ArrayList<>();
@@ -45,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     protected List<View> buttonsNotInOwnVideo = new ArrayList<>();
     protected List<View> buttonsInOwnScreenShare = new ArrayList<>();
     protected List<View> buttonsNotInOwnScreenShare = new ArrayList<>();
+
+
 
     @Bind(R.id.user_name)
     EditText user_name;
@@ -103,7 +117,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "left...", Toast.LENGTH_SHORT).show();
                 }).error(error());
     }
-
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +129,80 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //all the logic of the onCreate will be put after this comment
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            checkPermission();
+        }
+        editText = findViewById(R.id.text);
+        micButton = findViewById(R.id.button);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
+
+        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        speechRecognizer.setRecognitionListener(
+                    new RecognitionListener() {
+                    @Override
+                    public void onReadyForSpeech(Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onBeginningOfSpeech() {
+                        editText.setText("");
+                        editText.setHint("Speech to Text Started Up");
+                    }
+
+                    @Override
+                    public void onRmsChanged(float v) {
+
+                    }
+
+                    @Override
+                    public void onBufferReceived(byte[] bytes) {
+
+                    }
+
+                    @Override
+                    public void onEndOfSpeech() {
+                        editText.setHint("Speech ended");
+                    }
+
+                    @Override
+                    public void onError(int i) {
+                        editText.setHint("Error Code: " + i);
+                    }
+
+                    @Override
+                    public void onResults (Bundle bundle){
+                        micButton.setImageResource(R.drawable.biolabselfie);
+                        ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        editText.setText(data.get(0));
+                    }
+
+                    @Override
+                    public void onPartialResults(Bundle bundle) {
+                    }
+
+                    @Override
+                    public void onEvent(int i, Bundle bundle) {
+
+                    }
+                });
+        micButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    speechRecognizer.stopListening();
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    micButton.setImageResource(R.drawable.biolabselfie);
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                }
+                return false;
+            }
+        });
+
 
         //we now initialize the sdk
         VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
@@ -218,4 +310,11 @@ public class MainActivity extends AppCompatActivity {
         list.add(findViewById(id));
         return this;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        speechRecognizer.destroy();
+    }
+
 }
