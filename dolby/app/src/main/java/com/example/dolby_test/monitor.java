@@ -68,7 +68,6 @@ public class monitor extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.call)
     public void onCall(String conference_name) {
         ParamsHolder paramsHolder = new ParamsHolder();
         paramsHolder.setDolbyVoice(true);
