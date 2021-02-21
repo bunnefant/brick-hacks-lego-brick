@@ -67,7 +67,7 @@ public class monitor extends AppCompatActivity {
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
-                                
+
                             }
                         }
                     });
