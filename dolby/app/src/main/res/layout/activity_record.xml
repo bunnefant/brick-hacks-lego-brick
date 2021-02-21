@@ -4,18 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".record">
+    tools:context=".record"
+    android:background="@drawable/activity_monitor_image">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/areYouSafe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:gravity="center"
+            android:text="What is your safe word?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weAreListening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Press the button and say your word"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp" />
+
         <EditText
             android:id="@+id/user_name"
-            android:layout_width="297dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginVertical="15dp" />
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="1" />
 
         <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
 
@@ -24,29 +46,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="Back" />
+            android:background="@color/colorAccent"
+            android:text="Next" />
 
         <EditText
             android:id="@+id/text"
             android:layout_width="594dp"
-            android:layout_height="157dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/button"
             android:hint="Tap to Speak"
             android:padding="10dp"
-            android:layout_marginVertical="10dp"/>
+            android:layout_marginVertical="3dp"/>
 
         <ImageView
             android:id="@+id/button"
-            android:layout_width="173dp"
-            android:layout_height="191dp"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="125dp"
+            android:layout_marginVertical="0dp"
             android:backgroundTint="#F9F8FA"
             android:paddingRight="10dp"
-            android:src="@drawable/safeword_mircophone"
-            android:layout_marginHorizontal="125dp"
-            android:layout_marginVertical="150dp"/>
+            android:src="@drawable/safeword_mircophone" />
     </LinearLayout>
 
 
