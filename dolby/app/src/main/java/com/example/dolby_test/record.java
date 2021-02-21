@@ -83,7 +83,7 @@ public class record extends AppCompatActivity {
 
                     @Override
                     public void onResults (Bundle bundle){
-                        micButton.setImageResource(R.drawable.biolabselfie);
+                        micButton.setImageResource(R.drawable.safeword_mircophone_record);
                         ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                         editText.setText(data.get(0));
                     }
@@ -104,7 +104,7 @@ public class record extends AppCompatActivity {
                     speechRecognizer.stopListening();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    micButton.setImageResource(R.drawable.biolabselfie);
+                    micButton.setImageResource(R.drawable.safeword_mircophone_record);
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;
