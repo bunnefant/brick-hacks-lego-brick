@@ -2,6 +2,7 @@ package com.example.dolby_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
@@ -39,6 +40,7 @@ import java.util.Random;
 
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        user_name.setHint("Name");
+        //user_name.setHint("Name");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -103,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onBeginningOfSpeech() {
-                        editText.setText("");
-                        editText.setHint("Speech to Text Started Up");
+                        //editText.setText("");
+                        //editText.setHint("Speech to Text Started Up");
                     }
 
                     @Override
@@ -119,12 +121,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onEndOfSpeech() {
-                        editText.setHint("Speech ended");
+                        //editText.setHint("Speech ended");
                     }
 
                     @Override
                     public void onError(int i) {
-                        editText.setHint("Error Code: " + i);
+                        //editText.setHint("Error Code: " + i);
                     }
 
                     @Override
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         //we now initialize the sdk
         VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
 
-        //adding the user_name, login and logout views related to the open/close and conference flow
+       /* //adding the user_name, login and logout views related to the open/close and conference flow
         add(views, R.id.login);
         add(views, R.id.logout);
 
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         add(buttonsNotInConference, R.id.join);
 
         // Set a default conference name
-        conference_name.setText("Avengers meeting");
+        conference_name.setText("Avengers meeting");*/
 
 
 
