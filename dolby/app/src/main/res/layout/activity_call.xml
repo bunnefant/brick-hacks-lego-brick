@@ -4,18 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".call">
+    android:background="@drawable/activity_monitor_image">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/leave"
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="-16dp">
+
+
+        <TextView
+            android:id="@+id/areYouSafe"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="216dp" />
+            android:layout_marginTop="8pt"
+            android:gravity="center"
+            android:text="A Representative is Online"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weAreListening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="We can hear you, talk to us.
+                                Swipe out when done"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="400dp"
+            app:srcCompat="@drawable/listening" />
+
+
+        <!-- Step 3. Put the layout changes for the video step here -->
+
+        <!-- Step 4. Put the layout changes for the view participants step here -->
+
+        <!-- Step 5. Put the layout changes for the screen sharing step here -->
+
+        <!-- Step 6. Put the layout changes for the recording step here -->
 
     </LinearLayout>
 

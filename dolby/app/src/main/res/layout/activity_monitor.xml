@@ -9,19 +9,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="-16dp">
 
 
         <TextView
             android:id="@+id/areYouSafe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Feel Unsafe?"
             android:layout_marginTop="10pt"
             android:gravity="center"
-            android:textStyle="bold"
+            android:text="Feel Unsafe?"
+            android:textColor="@color/colorPrimary"
             android:textSize="35dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/weAreListening"
@@ -34,11 +36,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_marginTop="350dp"
-            android:layout_gravity="center"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/listening" />
+            android:layout_gravity="center"
+            android:layout_marginTop="450dp"
+            app:srcCompat="@drawable/not_listening" />
 
 
         <!-- Step 3. Put the layout changes for the video step here -->

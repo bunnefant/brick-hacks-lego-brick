@@ -4,15 +4,11 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
-    android:orientation="vertical"
-    android:visibility="invisible">
-
+    android:orientation="vertical">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/voice_assistance"
-        android:visibility="visible" />
-
+        android:src="@drawable/voice_assistance" />
     <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"

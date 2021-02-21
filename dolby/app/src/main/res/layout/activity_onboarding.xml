@@ -7,8 +7,6 @@
     tools:context=".OnboardingActivity"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:id="@+id/lay_one"
         android:layout_width="match_parent"
@@ -55,8 +53,8 @@
             android:letterSpacing="0.0265"
             android:paddingTop="20.3dp"
             android:paddingBottom="12.9dp"
-            android:text="NEXT EDUCATE"
-            android:textColor="@color/myfav"
+            android:text="STAY SAFE"
+            android:textColor="@color/purple"
             android:textSize="14.3sp" />
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +62,7 @@
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/sf_pro_display_bold"
             android:lineSpacingExtra="4.7sp"
-            android:text="Android Source code "
+            android:text="Call a safety representative"
             android:textColor="@color/blackTxt"
             android:textSize="23.3sp" />
         <TextView
@@ -73,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/sf_pro_display_bold"
             android:lineSpacingExtra="4.7sp"
-            android:text="and inspiration "
+            android:text="if you ever feel unsafe"
             android:textColor="@color/blackTxt"
             android:textSize="23.3sp" />
         <TextView
@@ -83,7 +81,7 @@
             android:layout_marginTop="4.5dp"
             android:fontFamily="@font/sf_pro_display_medium"
             android:letterSpacing="0.0265"
-            android:text="@string/subtitle1"
+            android:text="Press GET STARTED now"
             android:textColor="@color/grayTxt"
             android:textSize="13sp" />
         <TextView
@@ -92,15 +90,17 @@
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/sf_pro_display_medium"
             android:letterSpacing="0.0265"
-            android:text="Get inspired and make Android Code"
+            android:text="and we can assist right away"
             android:textColor="@color/grayTxt"
             android:textSize="13sp" />
 
         <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:text="Button"
+            android:layout_height="80sp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/purple"
+            android:text="GET STARTED"
             android:visibility="visible" />
 
     </LinearLayout>
