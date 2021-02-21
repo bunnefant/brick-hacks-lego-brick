@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import butterknife.OnClick;
+
 public class record extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
@@ -33,6 +35,13 @@ public class record extends AppCompatActivity {
         }
     }
 
+
+    @OnClick(R.id.leave)
+    public void onLeave()   {
+        Intent intent = new Intent(this, monitor.class);
+        intent.putExtra("safe-word", finalPhrase);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +115,6 @@ public class record extends AppCompatActivity {
                     speechRecognizer.stopListening();
                     AudioRecordStatus=0;
                 }
-
                 else if (AudioRecordStatus==0){
                     micButton.setImageResource(R.drawable.safeword_mircophone_record);
 

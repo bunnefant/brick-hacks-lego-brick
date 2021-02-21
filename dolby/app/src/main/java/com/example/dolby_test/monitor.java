@@ -60,7 +60,7 @@ public class monitor extends AppCompatActivity {
     //Speech to text
     private SpeechRecognizer speechRecognizer;
     public String dangerPhrase;
-    public String safePhrase;
+    public String safePhrase = "I am not in harms way";
     public static final Integer RecordAudioRequestCode = 1;
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -90,9 +90,9 @@ public class monitor extends AppCompatActivity {
                 .error((error_in) -> {
                     Toast.makeText(monitor.this, "Could not create conference", Toast.LENGTH_SHORT).show();
                 });
-        List<ParticipantInfo> person = new ArrayList<>();
-        person.add(new ParticipantInfo("Helper", "", ""));
-        VoxeetSDK.notification().invite(VoxeetSDK.conference().getConference(), person);
+//        List<ParticipantInfo> person = new ArrayList<>();
+//        person.add(new ParticipantInfo("Helper", "", ""));
+//        VoxeetSDK.notification().invite(VoxeetSDK.conference().getConference(), person);
 
 
         Intent intent = new Intent(this, call.class);
@@ -128,10 +128,11 @@ public class monitor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
         ButterKnife.bind(this);
-        String name = getIntent().getStringExtra("Name");
+        dangerPhrase = getIntent().getStringExtra("safe-word");
         VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
         String conference_name = "Saftey-Hotline";
         //login
+        String name = "Vennela";
         VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
                 .then((result, solver) -> {
                     Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();

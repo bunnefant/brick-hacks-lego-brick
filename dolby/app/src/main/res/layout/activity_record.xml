@@ -18,13 +18,13 @@
             android:layout_marginVertical="15dp" />
 
         <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
+
         <Button
             android:id="@+id/leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
             android:layout_marginRight="10dp"
-            />
+            android:text="Back" />
 
         <EditText
             android:id="@+id/text"
