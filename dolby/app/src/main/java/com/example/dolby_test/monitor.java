@@ -132,7 +132,7 @@ public class monitor extends AppCompatActivity {
         VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
         String conference_name = "Saftey-Hotline";
         //login
-        String name = "Vennela";
+        String name = "Sohil";
         VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
                 .then((result, solver) -> {
                     Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();

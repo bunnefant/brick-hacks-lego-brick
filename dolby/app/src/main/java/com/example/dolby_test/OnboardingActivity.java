@@ -1,5 +1,6 @@
 package com.example.dolby_test;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +8,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.dolby_test.Adapter.Adapter_walkthrough;
 
+import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
 public class OnboardingActivity extends AppCompatActivity {
 
     public ViewPager viewpager;
     Adapter_walkthrough adapter_walkthrough;
+
+    @OnClick(R.id.next)
+    public void onLeave()   {
+        Intent intent = new Intent(this, record.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
