@@ -5,71 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DashboardActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Step 1. Put the layout changes for the open/close session step here -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="user session" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/user_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="log in" />
-
-                <Button
-                    android:id="@+id/logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="logout" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Step 2. Put the layout changes for the join conference step here -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="conference name :" />
-
         <EditText
-            android:id="@+id/conference_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/user_name"
+            android:layout_width="297dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/join"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="start" />
+            android:layout_weight="1" />
 
             <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
             <Button
@@ -79,26 +26,31 @@
                 android:text="leave"
                 android:layout_marginRight="10dp"
                 />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/button"
-                android:layout_marginRight="15dp"
-                android:padding="10dp"
-                android:hint="Tap to Speak"
-                android:id="@+id/text"
-                android:layout_centerInParent="true"
-                />
 
-            <ImageView
-                android:id="@+id/button"
-                android:layout_width="102dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:backgroundTint="#F9F8FA"
-                android:paddingRight="10dp"
-                android:src="@drawable/biolabselfie" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="594dp"
+            android:layout_height="157dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/button"
+            android:hint="Tap to Speak"
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/button"
+            android:layout_width="451dp"
+            android:layout_height="433dp"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="#F9F8FA"
+            android:paddingRight="10dp"
+            android:src="@drawable/biolabselfie" />
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:text="Start Test" />
+
 
 
         <!-- Step 3. Put the layout changes for the video step here -->

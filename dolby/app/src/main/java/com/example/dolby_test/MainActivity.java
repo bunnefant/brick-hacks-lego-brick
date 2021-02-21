@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
-
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
@@ -39,8 +37,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,62 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Bind(R.id.user_name)
     EditText user_name;
 
-    @Bind(R.id.conference_name)
-    EditText conference_name;
 
-    @OnClick(R.id.login)
-    public void onLogin() {
-        VoxeetSDK.session().open(new ParticipantInfo(user_name.getText().toString(), "", ""))
-                .then((result, solver) -> {
-                    Toast.makeText(MainActivity.this, "log in successful", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error(error());
-    }
 
-    @OnClick(R.id.logout)
-    public void onLogout() {
-        VoxeetSDK.session().close()
-                .then((result, solver) -> {
-                    Toast.makeText(MainActivity.this, "logout done", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                }).error(error());
-    }
-
-    @OnClick(R.id.join)
-    public void onJoin() {
-        ParamsHolder paramsHolder = new ParamsHolder();
-        paramsHolder.setDolbyVoice(true);
-
-        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
-                .setConferenceAlias(conference_name.getText().toString())
-                .setParamsHolder(paramsHolder)
-                .build();
-
-        VoxeetSDK.conference().create(conferenceCreateOptions)
-                .then((ThenPromise<CreateConferenceResult, Conference>) res -> {
-                    Conference conference = VoxeetSDK.conference().getConference(res.conferenceId);
-                    return VoxeetSDK.conference().join(conference);
-                })
-                .then(conference -> {
-                    Toast.makeText(MainActivity.this, "started...", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error((error_in) -> {
-                    Toast.makeText(MainActivity.this, "Could not create conference", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    @OnClick(R.id.leave)
-    public void onLeave() {
-        VoxeetSDK.conference().leave()
-                .then((result, solver) -> {
-                    updateViews();
-                    Toast.makeText(MainActivity.this, "left...", Toast.LENGTH_SHORT).show();
-                }).error(error());
+    @OnClick(R.id.startButton)
+    public void startAppTest()  {
+        Intent intent = new Intent(this, monitor.class);
+        intent.putExtra("Name", user_name.getText().toString());
+        startActivity(intent);
     }
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -124,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        user_name.setHint("Name");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -238,39 +192,10 @@ public class MainActivity extends AppCompatActivity {
         // Set a default conference name
         conference_name.setText("Avengers meeting");
 
-        // Add the leave button and enable it only while in a conference
-        add(views, R.id.leave);
-        add(buttonsInConference, R.id.leave);
+
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        //here will be put the permission check
-
-        //we update the various views to enable or disable the ones we want to
-        updateViews();
-
-        //register the current activity in the SDK
-        VoxeetSDK.instance().register(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA}, 0x20);
-        }
-
-    }
-
-    @Override
-    protected void onPause() {
-        //register the current activity in the SDK
-        VoxeetSDK.instance().unregister(this);
-
-        super.onPause();
-    }
 
     private void updateViews() {
         //this method will be updated step by step
