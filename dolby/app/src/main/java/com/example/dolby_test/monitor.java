@@ -1,33 +1,23 @@
 package com.example.dolby_test;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.content.Context;
-import android.location.Location;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.promise.solve.ErrorPromise;
 import com.voxeet.promise.solve.ThenPromise;
@@ -41,11 +31,8 @@ import com.voxeet.sdk.services.conference.information.ConferenceInformation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class monitor extends AppCompatActivity {
     protected List<View> views = new ArrayList<>();
@@ -124,20 +111,17 @@ public class monitor extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*Bundle extras = getIntent().getExtras();
+        dangerPhrase = extras.getString("safeWord");
+        android.util.Log.w("myApp", "result is"+dangerPhrase);*/
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        dangerPhrase = sharedPref.getString("safeWord", "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
         ButterKnife.bind(this);
-        dangerPhrase = getIntent().getStringExtra("safe-word");
-        VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
-        String conference_name = "Saftey-Hotline";
+
         //login
-        String name = "Sohil";
-        VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
-                .then((result, solver) -> {
-                    Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error(error());
+
         //join call
 
         //Speech to Text
@@ -161,6 +145,8 @@ public class monitor extends AppCompatActivity {
                     public void onBeginningOfSpeech() {
                         //editText.setText("");
                         //editText.setHint("Speech to Text Started Up");
+                        android.util.Log.w("myApp", "speech recording booted up");
+
                     }
 
                     @Override
@@ -186,9 +172,22 @@ public class monitor extends AppCompatActivity {
                     @Override
                     public void onResults (Bundle bundle){
                         ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                        if(data.get(0).contains(dangerPhrase)) {
+                        android.util.Log.w("myApp", "result is"+data.get(0));
+
+                        if(data.get(0).toLowerCase().contains(dangerPhrase.toLowerCase())) {
                             //DANGER RUN
                             speechRecognizer.stopListening();
+                            String name = "Sohil";
+                            VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+                            String conference_name = "Saftey-Hotline";
+                            VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
+                                    .then((result, solver) -> {
+                                        Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
+                                        updateViews();
+                                    })
+                                    .error(error());
+                            onCall(conference_name);
+
 
                         }
                         else if (data.get(0).contains(safePhrase)) {
@@ -200,12 +199,24 @@ public class monitor extends AppCompatActivity {
                     @Override
                     public void onPartialResults(Bundle bundle) {
                         ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        android.util.Log.w("myapp", dangerPhrase);
                         if(data.get(0).contains(dangerPhrase)) {
                             //DANGER RUN
                             speechRecognizer.stopListening();
+                            String name = "Sohil";
+                            VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+                            String conference_name = "Saftey-Hotline";
+                            VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
+                                    .then((result, solver) -> {
+                                        Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
+                                        updateViews();
+                                    })
+                                    .error(error());
+                            onCall(conference_name);
+
 
                         }
-                        else if (data.get(0).contains(safePhrase)) {
+                        else if (data.get(0).toLowerCase().contains(dangerPhrase.toLowerCase())) {
                             //SAFE RUN
                             speechRecognizer.stopListening();
                         }
@@ -216,7 +227,6 @@ public class monitor extends AppCompatActivity {
 
                     }
                 });
-        onCall(conference_name);
 //        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 //        Context context = getApplicationContext();
 //        CharSequence text = "Hello toast!";

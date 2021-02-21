@@ -1,7 +1,9 @@
 package com.example.dolby_test;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,8 +41,17 @@ public class record extends AppCompatActivity {
 
     @OnClick(R.id.leave)
     public void onLeave()   {
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("safeWord", finalPhrase);
+        editor.apply();
+
         Intent intent = new Intent(this, monitor.class);
-        intent.putExtra("safe-word", finalPhrase);
+        Bundle extras = new Bundle();
+        String messageBundle = finalPhrase;
+        extras.putString("safeWord", messageBundle);
+        intent.putExtras(extras);
         startActivity(intent);
     }
     public void startNewActivity() {
@@ -108,6 +119,9 @@ public class record extends AppCompatActivity {
                         micButton.setImageResource(R.drawable.safeword_mircophone_record);
                         ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                         editText.setText(data.get(0));
+                        finalPhrase=data.get(0);
+                        android.util.Log.e("Send Safe Word Phrase:", finalPhrase);
+
                     }
 
                     @Override

@@ -38,7 +38,7 @@ public class OnboardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startNewActivity();
-                android.util.Log.e("myApp", "on click ran");
+                android.util.Log.w("myApp", "on click ran");
             }
         });
 

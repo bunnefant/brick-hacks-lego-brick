@@ -16,7 +16,7 @@
             android:id="@+id/areYouSafe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Are you safe?"
+            android:text="Feel Unsafe?"
             android:layout_marginTop="10pt"
             android:gravity="center"
             android:textStyle="bold"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="We are listening"
+            android:text="Just say the Key Word"
             android:textColor="@color/colorPrimary"
             android:textSize="20dp" />
 
