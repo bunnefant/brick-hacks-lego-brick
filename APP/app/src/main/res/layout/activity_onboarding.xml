@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".OnboardingActivity">
+
+    <View
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/icon_outer_background"
+        app:layout_constraintBottom_toBottomOf="@id/ImageNext"
+        app:layout_constraintEnd_toEndOf="@id/ImageNext"
+        app:layout_constraintStart_toStartOf="@id/ImageNext"
+        app:layout_constraintTop_toTopOf="@id/ImageNext"/>
+
+
+    <View
+        android:id="@+id/viewCenterofNext"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/ImageNext"
+        app:layout_constraintEnd_toEndOf="@id/ImageNext"
+        app:layout_constraintStart_toStartOf="@id/ImageNext"
+        app:layout_constraintTop_toTopOf="@id/ImageNext"/>
+
+    <ImageView
+        android:id="@+id/ImageNext"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/icon_background"
+        android:src="@drawable/ic_right"
+        app:layout_constraintBottom_toTopOf="@id/buttonGetStarted"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGetStarted"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Get Started"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

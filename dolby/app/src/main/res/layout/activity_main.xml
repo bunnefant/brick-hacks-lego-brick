@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DashboardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Step 1. Put the layout changes for the open/close session step here -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user session" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="log in" />
+
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="logout" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Step 2. Put the layout changes for the join conference step here -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="conference name :" />
+
+        <EditText
+            android:id="@+id/conference_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/join"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="start" />
+
+            <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
+            <Button
+                android:id="@+id/leave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="leave" />
+
+        </LinearLayout>
+
+        <!-- Step 3. Put the layout changes for the video step here -->
+
+        <!-- Step 4. Put the layout changes for the view participants step here -->
+
+        <!-- Step 5. Put the layout changes for the screen sharing step here -->
+
+        <!-- Step 6. Put the layout changes for the recording step here -->
+
+    </LinearLayout>
+</ScrollView>
