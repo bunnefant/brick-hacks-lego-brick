@@ -46,7 +46,6 @@ public class monitor extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     //Speech to text
     private SpeechRecognizer speechRecognizer;
-    public String dangerPhrase;
     public String safePhrase = "I am not in harms way";
     public static final Integer RecordAudioRequestCode = 1;
     private void checkPermission() {
@@ -118,7 +117,7 @@ public class monitor extends AppCompatActivity {
         dangerPhrase = extras.getString("safeWord");
         android.util.Log.w("myApp", "result is"+dangerPhrase);*/
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        dangerPhrase = sharedPref.getString("safeWord", "");
+        final String dangerPhrase = sharedPref.getString("safeWord", "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
         ButterKnife.bind(this);
@@ -182,7 +181,7 @@ public class monitor extends AppCompatActivity {
                             speechRecognizer.stopListening();
                             String name = "Sohil";
                             VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
-                            String conference_name = "Saftey-Hotline";
+                            String conference_name = "Safety-Hotline";
                             VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
                                     .then((result, solver) -> {
                                         Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
