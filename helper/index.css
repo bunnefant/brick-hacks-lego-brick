@@ -1,0 +1,15 @@
+h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#form {
+  text-align: center;
+}
+#actions {
+  display: inline-block;
+}
+#recording {
+  display: inline-block;
+
+}
