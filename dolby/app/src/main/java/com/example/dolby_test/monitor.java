@@ -3,6 +3,7 @@ package com.example.dolby_test;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 
 import android.Manifest;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.voxeet.VoxeetSDK;
 import com.voxeet.promise.solve.ErrorPromise;
 import com.voxeet.promise.solve.ThenPromise;
@@ -45,12 +49,36 @@ public class monitor extends AppCompatActivity {
     protected List<View> buttonsNotInOwnVideo = new ArrayList<>();
     protected List<View> buttonsInOwnScreenShare = new ArrayList<>();
     protected List<View> buttonsNotInOwnScreenShare = new ArrayList<>();
-
+    private FusedLocationProviderClient fusedLocationClient;
 
 
     @OnClick(R.id.call)
-    public void onCall()    {
-        
+    public void onCall() {
+        List<ParticipantInfo> person = new ArrayList<>();
+        person.add(new ParticipantInfo("Helper", "", ""));
+        VoxeetSDK.notification().invite(VoxeetSDK.conference().getConference(), person);
+
+        String coordinates = "";
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                
+                            }
+                        }
+                    });
+
+        }
+        Intent intent = new Intent(this, call.class);
+        intent.putExtra("Location", coordinates);
+        startActivity(intent);
+
+
+
     }
 
 
@@ -82,7 +110,7 @@ public class monitor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
         String name = getIntent().getStringExtra("Name");
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 //        Context context = getApplicationContext();
 //        CharSequence text = "Hello toast!";
 //        int duration = Toast.LENGTH_SHORT;
