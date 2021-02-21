@@ -9,4 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/data_input" />
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="189dp"
+        android:text="Button"
+        android:visibility="invisible" />
 </RelativeLayout>
