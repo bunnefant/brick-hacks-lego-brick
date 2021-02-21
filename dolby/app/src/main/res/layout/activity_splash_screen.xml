@@ -8,9 +8,12 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="100dp"
         app:srcCompat="@drawable/logo"
         tools:ignore="MissingConstraints" />
 
