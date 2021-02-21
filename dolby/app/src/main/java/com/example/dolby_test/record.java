@@ -1,9 +1,5 @@
 package com.example.dolby_test;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,8 +10,13 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -42,7 +43,10 @@ public class record extends AppCompatActivity {
         intent.putExtra("safe-word", finalPhrase);
         startActivity(intent);
     }
-
+    public void startNewActivity() {
+        Intent intent = new Intent(this, monitor.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,14 @@ public class record extends AppCompatActivity {
         micButton = findViewById(R.id.button);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
+        Button button = (Button) findViewById(R.id.leave);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewActivity();
+                android.util.Log.e("myApp", "on click ran");
+            }
+        });
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
