@@ -4,9 +4,9 @@ package com.example.dolby_test.Adapter;
         import androidx.fragment.app.FragmentManager;
         import androidx.fragment.app.FragmentStatePagerAdapter;
 
-        import com.example.app.fragment.Fragment_walkthrough_one;
-        import com.example.app.fragment.Fragment_walkthrough_two;
-        import com.example.app.fragment.Fragment_walkthrough_three;
+        import com.example.dolby_test.fragment.Fragment_walkthrough_one;
+        import com.example.dolby_test.fragment.Fragment_walkthrough_two;
+        import com.example.dolby_test.fragment.Fragment_walkthrough_three;
 
         public class Adapter_walkthrough extends FragmentStatePagerAdapter {
     public Adapter_walkthrough(FragmentManager fm) {
