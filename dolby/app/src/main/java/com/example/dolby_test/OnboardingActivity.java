@@ -16,7 +16,7 @@ public class OnboardingActivity extends AppCompatActivity {
     public ViewPager viewpager;
     Adapter_walkthrough adapter_walkthrough;
 
-    @OnClick(R.id.next)
+    @OnClick(R.id.tv_getstarted)
     public void onLeave()   {
         Intent intent = new Intent(this, record.class);
         startActivity(intent);
