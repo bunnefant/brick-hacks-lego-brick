@@ -61,6 +61,7 @@ public class monitor extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     public String dangerPhrase;
     public String safePhrase;
+    public static final Integer RecordAudioRequestCode = 1;
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
@@ -68,32 +69,34 @@ public class monitor extends AppCompatActivity {
     }
 
     @OnClick(R.id.call)
-    public void onCall() {
+    public void onCall(String conference_name) {
+        ParamsHolder paramsHolder = new ParamsHolder();
+        paramsHolder.setDolbyVoice(true);
+
+        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
+                .setConferenceAlias(conference_name)
+                .setParamsHolder(paramsHolder)
+                .build();
+
+        VoxeetSDK.conference().create(conferenceCreateOptions)
+                .then((ThenPromise<CreateConferenceResult, Conference>) res -> {
+                    Conference conference = VoxeetSDK.conference().getConference(res.conferenceId);
+                    return VoxeetSDK.conference().join(conference);
+                })
+                .then(conference -> {
+                    Toast.makeText(monitor.this, "started...", Toast.LENGTH_SHORT).show();
+                    updateViews();
+                })
+                .error((error_in) -> {
+                    Toast.makeText(monitor.this, "Could not create conference", Toast.LENGTH_SHORT).show();
+                });
         List<ParticipantInfo> person = new ArrayList<>();
         person.add(new ParticipantInfo("Helper", "", ""));
         VoxeetSDK.notification().invite(VoxeetSDK.conference().getConference(), person);
 
-        String coordinates = "";
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                // Logic to handle location object
 
-                            }
-                        }
-                    });
-
-        }
         Intent intent = new Intent(this, call.class);
-        intent.putExtra("Location", coordinates);
         startActivity(intent);
-
-
-
     }
 
 
@@ -124,7 +127,19 @@ public class monitor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
+        ButterKnife.bind(this);
         String name = getIntent().getStringExtra("Name");
+        VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+        String conference_name = "Saftey-Hotline";
+        //login
+        VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
+                .then((result, solver) -> {
+                    Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
+                    updateViews();
+                })
+                .error(error());
+        //join call
+
         //Speech to Text
 
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -201,20 +216,20 @@ public class monitor extends AppCompatActivity {
 
                     }
                 });
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        onCall(conference_name);
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 //        Context context = getApplicationContext();
 //        CharSequence text = "Hello toast!";
 //        int duration = Toast.LENGTH_SHORT;
 //        Toast toast = Toast.makeText(context, text, duration);
 //        toast.show();
 
-        ButterKnife.bind(this);
+
 
         //all the logic of the onCreate will be put after this comment
 
         //we now initialize the sdk
-        VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
+
 
         //adding the user_name, login and logout views related to the open/close and conference flow
 //        add(views, R.id.login);
@@ -250,35 +265,8 @@ public class monitor extends AppCompatActivity {
 //        // Add the leave button and enable it only while in a conference
 //        add(views, R.id.leave);
 //        add(buttonsInConference, R.id.leave);
-        String conference_name = "Saftey-Hotline";
-        //login
-        VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))
-                .then((result, solver) -> {
-                    Toast.makeText(monitor.this, "log in successful", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error(error());
-        //join call
-        ParamsHolder paramsHolder = new ParamsHolder();
-        paramsHolder.setDolbyVoice(true);
 
-        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
-                .setConferenceAlias(conference_name)
-                .setParamsHolder(paramsHolder)
-                .build();
 
-        VoxeetSDK.conference().create(conferenceCreateOptions)
-                .then((ThenPromise<CreateConferenceResult, Conference>) res -> {
-                    Conference conference = VoxeetSDK.conference().getConference(res.conferenceId);
-                    return VoxeetSDK.conference().join(conference);
-                })
-                .then(conference -> {
-                    Toast.makeText(monitor.this, "started...", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error((error_in) -> {
-                    Toast.makeText(monitor.this, "Could not create conference", Toast.LENGTH_SHORT).show();
-                });
     }
 
     @Override
