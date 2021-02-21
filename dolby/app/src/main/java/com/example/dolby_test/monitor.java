@@ -179,7 +179,7 @@ public class monitor extends AppCompatActivity {
                         if(data.get(0).toLowerCase().contains(dangerPhrase.toLowerCase())) {
                             //DANGER RUN
                             speechRecognizer.stopListening();
-                            String name = "Sohil";
+                            String name = "Vennela";
                             VoxeetSDK.initialize("grB4NiWlMEvzpaLbBKBmVw==", "ap6TnDQpnFUEPlIgrN3ir3hoL2NLrCLHLHd1s_YjYW0=");
                             String conference_name = "Safety-Hotline";
                             VoxeetSDK.session().open(new ParticipantInfo(name, "", ""))

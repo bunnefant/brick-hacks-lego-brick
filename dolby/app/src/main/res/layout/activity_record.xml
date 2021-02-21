@@ -28,16 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Press the button and say your word"
+            android:text="Press the microphone and say your word"
             android:textColor="@color/colorPrimary"
             android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="2dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="1" />
 
         <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
 
@@ -45,28 +38,32 @@
             android:id="@+id/leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:layout_marginLeft="160dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:text="Next" />
 
         <EditText
             android:id="@+id/text"
-            android:layout_width="594dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
+            android:layout_marginVertical="3dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="50dp"
             android:layout_toLeftOf="@id/button"
             android:hint="Tap to Speak"
-            android:padding="10dp"
-            android:layout_marginVertical="3dp"/>
+            android:padding="10dp" />
 
         <ImageView
             android:id="@+id/button"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="125dp"
+            android:layout_height="80dp"
             android:layout_alignParentRight="true"
-            android:layout_marginHorizontal="125dp"
-            android:layout_marginVertical="0dp"
+            android:layout_marginHorizontal="143dp"
+            android:layout_marginVertical="15dp"
             android:backgroundTint="#F9F8FA"
             android:paddingRight="10dp"
             android:src="@drawable/safeword_microphone" />
