@@ -111,7 +111,6 @@ public class monitor extends AppCompatActivity {
 
 
 
-    @OnClick(R.id.leave)
     public void onLeave() {
         VoxeetSDK.conference().leave()
                 .then((result, solver) -> {
