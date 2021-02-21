@@ -1,4 +1,4 @@
-package com.example.app.fragment;
+package com.example.dolby_test.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

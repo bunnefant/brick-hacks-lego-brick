@@ -1,4 +1,4 @@
-package com.example.app.fragment;
+package com.example.dolby_test.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.app.R;
 
-public class Fragment_walkthrough_three extends Fragment{
+public class Fragment_walkthrough_one extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -19,6 +19,6 @@ public class Fragment_walkthrough_three extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_walkthrough_three, container, false);
+        return inflater.inflate(R.layout.fragment_walkthrough_one, container, false);
     }
 }

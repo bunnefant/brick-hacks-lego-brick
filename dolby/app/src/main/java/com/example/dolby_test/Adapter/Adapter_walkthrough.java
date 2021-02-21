@@ -1,4 +1,4 @@
-package com.example.app.Adapter;
+package com.example.dolby_test.Adapter;
 
         import androidx.fragment.app.Fragment;
         import androidx.fragment.app.FragmentManager;
