@@ -12,39 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/user_name"
-            android:layout_width="297dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
-            <!-- Step 2.2. The layout will be upgraded in the leave conference step -->
-            <Button
-                android:id="@+id/leave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="leave"
-                android:layout_marginRight="10dp"
-                />
-
-        <EditText
-            android:id="@+id/text"
-            android:layout_width="594dp"
-            android:layout_height="157dp"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@id/button"
-            android:hint="Tap to Speak"
-            android:padding="10dp" />
-
-        <ImageView
-            android:id="@+id/button"
-            android:layout_width="451dp"
-            android:layout_height="433dp"
-            android:layout_alignParentRight="true"
-            android:backgroundTint="#F9F8FA"
-            android:paddingRight="10dp"
-            android:src="@drawable/biolabselfie" />
         <Button
             android:id="@+id/startButton"
             android:layout_width="121dp"
