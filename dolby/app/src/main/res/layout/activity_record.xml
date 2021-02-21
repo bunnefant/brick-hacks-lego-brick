@@ -69,7 +69,7 @@
             android:layout_marginVertical="0dp"
             android:backgroundTint="#F9F8FA"
             android:paddingRight="10dp"
-            android:src="@drawable/safeword_mircophone" />
+            android:src="@drawable/safeword_microphone" />
     </LinearLayout>
 
 
