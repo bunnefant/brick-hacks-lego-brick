@@ -1,58 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".OnboardingActivity">
+    tools:context=".OnboardingActivity"
+    android:orientation="vertical">
 
-    <View
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="@drawable/icon_outer_background"
-        app:layout_constraintBottom_toBottomOf="@id/ImageNext"
-        app:layout_constraintEnd_toEndOf="@id/ImageNext"
-        app:layout_constraintStart_toStartOf="@id/ImageNext"
-        app:layout_constraintTop_toTopOf="@id/ImageNext"/>
+    <LinearLayout
+        android:id="@+id/lay_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_marginTop="5dp"
+            android:clipToPadding="false"
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp" />
 
-    <View
-        android:id="@+id/viewCenterofNext"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/ImageNext"
-        app:layout_constraintEnd_toEndOf="@id/ImageNext"
-        app:layout_constraintStart_toStartOf="@id/ImageNext"
-        app:layout_constraintTop_toTopOf="@id/ImageNext"/>
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:paddingBottom="15dp"
+            app:ci_drawable="@drawable/ic_brightness_1_black_24dp"
+            app:ci_drawable_unselected="@drawable/ic_brightness_1_grey_24dp"
+            app:ci_height="5dp"
+            app:ci_width="5dp" />
 
-    <ImageView
-        android:id="@+id/ImageNext"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/icon_background"
-        android:src="@drawable/ic_right"
-        app:layout_constraintBottom_toTopOf="@id/buttonGetStarted"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonGetStarted"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        android:text="Get Started"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:backgroundTint="@color/colorPrimary"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay_one"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:letterSpacing="0.0265"
+            android:paddingTop="20.3dp"
+            android:paddingBottom="12.9dp"
+            android:text="NEXT EDUCATE"
+            android:textColor="@color/myfav"
+            android:textSize="14.3sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:lineSpacingExtra="4.7sp"
+            android:text="Android Source code "
+            android:textColor="@color/blackTxt"
+            android:textSize="23.3sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:lineSpacingExtra="4.7sp"
+            android:text="and inspiration "
+            android:textColor="@color/blackTxt"
+            android:textSize="23.3sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4.5dp"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:letterSpacing="0.0265"
+            android:text="@string/subtitle1"
+            android:textColor="@color/grayTxt"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:letterSpacing="0.0265"
+            android:text="Get inspired and make Android Code"
+            android:textColor="@color/grayTxt"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tv_getstarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25.1dp"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:text="@string/get_started"
+            android:textColor="@color/fav"
+            android:textSize="15.7sp" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
