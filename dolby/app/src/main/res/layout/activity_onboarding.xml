@@ -95,22 +95,14 @@
             android:text="Get inspired and make Android Code"
             android:textColor="@color/grayTxt"
             android:textSize="13sp" />
-        <TextView
-            android:id="@+id/tv_getstarted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25.1dp"
-            android:fontFamily="@font/sf_pro_display_medium"
-            android:text="@string/get_started"
-            android:textColor="@color/fav"
-            android:textSize="15.7sp" />
+
         <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
-            android:layout_height="332dp"
+            android:layout_height="100sp"
             android:text="Button"
-            android:visibility="invisible" />
+            android:visibility="visible" />
+
     </LinearLayout>
 
 </RelativeLayout>
