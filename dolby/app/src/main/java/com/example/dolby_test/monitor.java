@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,6 +40,7 @@ import com.voxeet.sdk.services.conference.information.ConferenceInformation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import butterknife.Bind;
@@ -50,7 +57,15 @@ public class monitor extends AppCompatActivity {
     protected List<View> buttonsInOwnScreenShare = new ArrayList<>();
     protected List<View> buttonsNotInOwnScreenShare = new ArrayList<>();
     private FusedLocationProviderClient fusedLocationClient;
-
+    //Speech to text
+    private SpeechRecognizer speechRecognizer;
+    public String dangerPhrase;
+    public String safePhrase;
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+        }
+    }
 
     @OnClick(R.id.call)
     public void onCall() {
@@ -110,6 +125,83 @@ public class monitor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
         String name = getIntent().getStringExtra("Name");
+        //Speech to Text
+
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            checkPermission();
+        }
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizer.startListening(speechRecognizerIntent);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        speechRecognizer.setRecognitionListener(
+                new RecognitionListener() {
+                    @Override
+                    public void onReadyForSpeech(Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onBeginningOfSpeech() {
+                        //editText.setText("");
+                        //editText.setHint("Speech to Text Started Up");
+                    }
+
+                    @Override
+                    public void onRmsChanged(float v) {
+
+                    }
+
+                    @Override
+                    public void onBufferReceived(byte[] bytes) {
+
+                    }
+
+                    @Override
+                    public void onEndOfSpeech() {
+                        //editText.setHint("Speech ended");
+                    }
+
+                    @Override
+                    public void onError(int i) {
+                        //editText.setHint("Error Code: " + i);
+                    }
+
+                    @Override
+                    public void onResults (Bundle bundle){
+                        ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        if(data.get(0).contains(dangerPhrase)) {
+                            //DANGER RUN
+                            speechRecognizer.stopListening();
+
+                        }
+                        else if (data.get(0).contains(safePhrase)) {
+                            //SAFE RUN
+                            speechRecognizer.stopListening();
+                        }
+                    }
+
+                    @Override
+                    public void onPartialResults(Bundle bundle) {
+                        ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        if(data.get(0).contains(dangerPhrase)) {
+                            //DANGER RUN
+                            speechRecognizer.stopListening();
+
+                        }
+                        else if (data.get(0).contains(safePhrase)) {
+                            //SAFE RUN
+                            speechRecognizer.stopListening();
+                        }
+                    }
+
+                    @Override
+                    public void onEvent(int i, Bundle bundle) {
+
+                    }
+                });
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 //        Context context = getApplicationContext();
 //        CharSequence text = "Hello toast!";
