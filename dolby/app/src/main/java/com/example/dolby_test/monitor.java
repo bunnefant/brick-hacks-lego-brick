@@ -53,32 +53,34 @@ public class monitor extends AppCompatActivity {
 
 
     @OnClick(R.id.call)
-    public void onCall() {
+    public void onCall(String conference_name) {
+        ParamsHolder paramsHolder = new ParamsHolder();
+        paramsHolder.setDolbyVoice(true);
+
+        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
+                .setConferenceAlias(conference_name)
+                .setParamsHolder(paramsHolder)
+                .build();
+
+        VoxeetSDK.conference().create(conferenceCreateOptions)
+                .then((ThenPromise<CreateConferenceResult, Conference>) res -> {
+                    Conference conference = VoxeetSDK.conference().getConference(res.conferenceId);
+                    return VoxeetSDK.conference().join(conference);
+                })
+                .then(conference -> {
+                    Toast.makeText(monitor.this, "started...", Toast.LENGTH_SHORT).show();
+                    updateViews();
+                })
+                .error((error_in) -> {
+                    Toast.makeText(monitor.this, "Could not create conference", Toast.LENGTH_SHORT).show();
+                });
         List<ParticipantInfo> person = new ArrayList<>();
         person.add(new ParticipantInfo("Helper", "", ""));
         VoxeetSDK.notification().invite(VoxeetSDK.conference().getConference(), person);
 
-        String coordinates = "";
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                // Logic to handle location object
 
-                            }
-                        }
-                    });
-
-        }
         Intent intent = new Intent(this, call.class);
-        intent.putExtra("Location", coordinates);
         startActivity(intent);
-
-
-
     }
 
 
@@ -167,26 +169,7 @@ public class monitor extends AppCompatActivity {
                 })
                 .error(error());
         //join call
-        ParamsHolder paramsHolder = new ParamsHolder();
-        paramsHolder.setDolbyVoice(true);
 
-        ConferenceCreateOptions conferenceCreateOptions = new ConferenceCreateOptions.Builder()
-                .setConferenceAlias(conference_name)
-                .setParamsHolder(paramsHolder)
-                .build();
-
-        VoxeetSDK.conference().create(conferenceCreateOptions)
-                .then((ThenPromise<CreateConferenceResult, Conference>) res -> {
-                    Conference conference = VoxeetSDK.conference().getConference(res.conferenceId);
-                    return VoxeetSDK.conference().join(conference);
-                })
-                .then(conference -> {
-                    Toast.makeText(monitor.this, "started...", Toast.LENGTH_SHORT).show();
-                    updateViews();
-                })
-                .error((error_in) -> {
-                    Toast.makeText(monitor.this, "Could not create conference", Toast.LENGTH_SHORT).show();
-                });
     }
 
     @Override
